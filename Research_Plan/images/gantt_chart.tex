@@ -1,0 +1,54 @@
+% http://www.ctan.org/pkg/pgfgantt
+
+\begin{figure}[]
+\begin{center}
+
+\begin{ganttchart}[
+x unit = 0.45cm,
+y unit title=0.4cm,
+y unit chart=0.45cm,
+vgrid,
+hgrid, 
+title label anchor/.style={below=-1.7ex},
+title height=1,
+bar/.style={fill=gray!50},
+incomplete/.style={fill=white},
+progress label text={},
+bar height=0.7,
+group right shift=0,
+group top shift=0.5,
+group height=0.2,
+group peaks={}{}{0.2},
+milestone height=0.7,
+milestone label anchor/.style={below left=-1.7ex and 0.2ex}
+]{24}
+
+% Labels
+\gantttitle{Month}{24} \\
+\gantttitlelist{1,...,24}{1} \\
+
+% Group 1
+\ganttgroup{Group 1}{1}{12} \\
+\ganttbar{Task 1}{1}{2} \\
+\ganttbar{Task 2}{3}{8} \\
+\ganttbar{Task 3}{9}{10} \\
+\ganttbar{Task 4}{11}{12} \\
+\ganttmilestone{Publication 1}{12} \\
+
+% Group 2
+\ganttnewline
+\ganttgroup{Group 2}{13}{24} \\
+\ganttbar{Task 5}{13}{16} \\
+\ganttbar{Task 6}{15}{18} \\
+\ganttbar{Task 7}{19}{22} \\
+\ganttmilestone{Publication 2}{22} \\
+\ganttbar{Task 8}{23}{24}
+
+% Relations 
+\ganttlink{elem3}{elem7} 
+
+\end{ganttchart}
+\end{center}
+\caption{Gantt Chart}
+\label{fig:Gantt Chart}
+\end{figure}
