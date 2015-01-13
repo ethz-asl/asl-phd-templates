@@ -87,3 +87,8 @@ sympy-plots-for-*.tex/
 
 # xindy
 *.xdy
+
+# OS X
+.DS_Store
+
+Research_Plan/research-plan.pdf
