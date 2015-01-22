@@ -1,27 +1,27 @@
-targets=report.pdf
-deps=$(wildcard */*.tex) $(wildcard images/*.png) $(wildcard images/*.jpg) $(wildcard images/*.jpeg) $(wildcard images/*.pdf) $(wildcard bibliography/*.bib)
+.PHONY : all latex bibtex pdf view clean distclean
 
-%.pdf: %.tex $(deps) Makefile build
-	cd build && TEXINPUTS=../:../packages:${TEXINPUTS} pdflatex $<
-	cd build && BIBINPUTS=..:${BIBINPUTS} bibtex $*
-	cd build && TEXINPUTS=../:../packages:${TEXINPUTS} pdflatex $<
-	cd build && TEXINPUTS=../:../packages:${TEXINPUTS} pdflatex $<
-	mv build/$@ .
+TARGET=research-plan
+SOURCE=$(TARGET).tex
 
-all:	$(targets)
+all:
+	@echo "Compiling at `date +'%H-%M-%S'`"
+	pdflatex $(SOURCE)
+	bibtex $(TARGET)
+	pdflatex $(SOURCE)
+	pdflatex $(SOURCE)
 
-clean: buildclean
+latex:
+	pdflatex $(SOURCE)
+	pdflatex $(SOURCE)
 
-build:
-	mkdir -p build
+bibtex:
+	bibtex $(TARGET)
 
-buildclean:
-	rm -rf build *~ */*~ 
+view:
+	open $(TARGET).pdf &
 
-distclean: clean
-	rm -f $(targets)
+clean:
+	rm -f $(TARGET).aux $(TARGET).bbl $(TARGET).blg $(TARGET).log $(TARGET).out
 
-installdeb:
-	sudo apt-get install texlive texlive-math-extra
-
-.PHONY: clean buildclean distclean all dist installdeb
+distclean:clean
+	rm -f $(TARGET).pdf
