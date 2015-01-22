@@ -1,6 +1,6 @@
 .PHONY : all latex bibtex pdf view clean distclean
 
-TARGET=proposal
+TARGET=research-plan
 SOURCE=$(TARGET).tex
 
 all:
@@ -21,7 +21,7 @@ view:
 	open $(TARGET).pdf &
 
 clean:
-	rm -f $(TARGET).aux $(TARGET).bbl $(TARGET).blg $(TARGET).log
+	rm -f $(TARGET).aux $(TARGET).bbl $(TARGET).blg $(TARGET).log $(TARGET).out
 
 distclean:clean
 	rm -f $(TARGET).pdf
