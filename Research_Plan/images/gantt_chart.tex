@@ -8,20 +8,25 @@ x unit = 0.45cm,
 y unit title=0.4cm,
 y unit chart=0.45cm,
 vgrid,
-hgrid, 
+hgrid,
 title label anchor/.style={below=-1.7ex},
 title height=1,
-bar/.style={fill=gray!50},
+bar/.style={fill=gray!50,
+            draw=black,
+            line width=0.5pt},
 incomplete/.style={fill=white},
 progress label text={},
 bar height=0.7,
-group right shift=0,
+group left shift=0.0,
+group right shift=0.0,
 group top shift=0.5,
 group height=0.2,
-group peaks={}{}{0.2},
+group peaks width=0.4,
+group peaks height=0.25,
+group peaks tip position=0,
 milestone height=0.7,
 milestone label anchor/.style={below left=-1.7ex and 0.2ex}
-]{24}
+]{1}{24}
 
 % Labels
 \gantttitle{Month}{24} \\
@@ -44,8 +49,8 @@ milestone label anchor/.style={below left=-1.7ex and 0.2ex}
 \ganttmilestone{Publication 2}{22} \\
 \ganttbar{Task 8}{23}{24}
 
-% Relations 
-\ganttlink{elem3}{elem7} 
+% Relations
+\ganttlink{elem3}{elem7}
 
 \end{ganttchart}
 \end{center}
