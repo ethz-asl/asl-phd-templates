@@ -1,0 +1,131 @@
+\documentclass[a4paper]{scrartcl}
+
+%\usepackage{showframe}
+\usepackage[margin=2cm,footskip=.7cm]{geometry}
+\usepackage{enumitem}
+\usepackage{fourier}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[numbers,sort&compress]{natbib}
+
+\usepackage{pseudocode}
+\usepackage{multirow}
+\usepackage[font={small}]{caption}
+\usepackage{verbatim}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{listings}
+\usepackage{makecell}
+\usepackage{units}
+\usepackage{multicol}
+\usepackage[all]{nowidow} % Prevent widow and orphan lines
+\usepackage{graphicx} % for pdf, bitmapped graphics files
+\usepackage{epstopdf}
+\usepackage{subcaption}
+\usepackage[numbers]{natbib}
+
+%\RequirePackage[mathscr]{euscript}
+%\RequirePackage{bbding}
+%\RequirePackage{scalefnt}
+%\RequirePackage{mathtools}
+\RequirePackage[T1]{fontenc}
+
+
+%%% COLOR DEFINITIONS
+
+% KIT Colors
+\definecolor{kitgreenex}{RGB}{0,185,131}
+\definecolor{kitblueex}{RGB}{52,115,186}
+\definecolor{kitmaygreen}{RGB}{119,184,38}
+\definecolor{kityellow}{RGB}{255,228,0}
+\definecolor{kitorange}{RGB}{247,154,0}
+\definecolor{kitbrown}{RGB}{182,130,28}
+\definecolor{kitred}{RGB}{187,25,23}
+\definecolor{kitpurple}{RGB}{190,0,126}
+\definecolor{kitcyanblue}{RGB}{0,167,227}
+% Own Definitions
+\definecolor{grey}{RGB}{150,150,150}
+
+%%% FONTS
+\setkomafont{disposition}{\bfseries}
+\setkomafont{section}{\normalfont\large\bfseries}
+\setkomafont{subsection}{\normalfont\bfseries}
+\setkomafont{author}{\normalfont}
+\setkomafont{date}{\normalfont}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+% Use this for the drafts.
+\definecolor{todo-red}{RGB}{200,12,12}
+\definecolor{green4}{RGB}{0,128,0}
+\newcommand{\TODO}[2]{\textcolor{todo-red}{\textbf{TODO({#1}):} {#2}}}
+\newcommand{\NOTE}[1]{\textcolor{green4}{\textbf{NOTE:} [{#1}]}}
+
+%%% PARAGRAPH LAYOUT
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{6pt}
+
+
+%%% REBUTTAL COMMANDS
+\newenvironment{rebuttal}{\begin{enumerate}[label={\color{grey}\thesection.\arabic{enumi}},leftmargin=0pt,ref=\thesection.\arabic{enumi}]}{\end{enumerate}}
+\newcommand{\reviewtext}[1]{{\color{kitblueex} #1}}
+\newcommand{\revisedtext}[1]{{\textit{\color{kitred} #1}}}
+\newcommand{\papertext}[1]{\emph{``#1''}}
+\newcommand{\reviewchanges}[1]{{\color{orange} #1}} %changes since first submission
+
+%%% HYPERREF SETUP
+\hypersetup{
+	colorlinks = true,
+	linkcolor = kitmaygreen,
+	urlcolor = kitmaygreen
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Awesome paper title}
+\subtitle{Response to Reviewers Comments - ICRA Sensors Submission XXXX}
+\author{First Author \and Second Author \and Last Author}
+
+\begin{document}
+
+\maketitle
+
+Dear Reviewers,
+
+We would like to thank you for your valuable feedback and for considering our paper for publication. 
+%
+This document explains how we addressed your comments, questions, and suggestions (highlighted in \reviewtext{blue}).
+%
+In addition to these, we have revised the manuscript and have fixed the mentioned grammar mistakes and typos.
+
+For an easy comparison of our changes, we added the paper at the end of this letter with all the changes highlighted in \reviewchanges{orange}.
+
+Sincerely,\\
+First Author, Second Author, and Last Author
+
+\section*{Response to the Comments of Reviewer 1}
+\addtocounter{section}{1}
+
+\begin{rebuttal}
+\item \reviewtext{Very mean reviewer comment.}
+
+Thank you for your review and appreciation. We addressed the comment blablabla
+
+\item \reviewtext{Second very mean reviewer comment.}
+
+Thank you for your suggestion. We added a paragraph in Section 4.1 for a better descriptionn.
+\end{rebuttal}
+
+
+\section*{Response to the Comments of Reviewer 2}
+\addtocounter{section}{2}
+\begin{rebuttal}
+\item \reviewtext{bla}
+
+blabla
+
+\end{rebuttal}
+
+% \bibliographystyle{unsrt}
+% \bibliography{bibliography.bib}
+
+\end{document}
