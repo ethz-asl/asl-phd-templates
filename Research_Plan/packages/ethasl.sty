@@ -2,22 +2,17 @@
 % ETHASL - (ethasl.sty) Style file
 % A LaTeX package providing new style definitions and commands.
 % 2014.05: Péter Fankhauser
+% 2021.12: Tim Kazik, v1.2 now using tikz to avoid overfull box complaints
 % This package is based on the ETHIMRT package by Eric A. Mueller.
 %==============================================================================
-\def\Presentation@Version{1.1}
+
+\def\Presentation@Version{1.2}
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{packages/ethasl}[2013/10/07, v. \Presentation@Version]
 \typeout{providing new style definitions and commands ---}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Colors
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{color}
-\definecolor{gray}{rgb}{0.5,0.5,0.5}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Title page
+% 'Variables'
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\@subtitle}{}
@@ -29,84 +24,79 @@
 \newcommand{\@student}{}
 \newcommand{\student}[1]{\gdef\@student{#1}}
 
+\newcommand\mOffset{2.8} % margin offset of vertical bar from top/bottom [cm]
 
-%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Definition of title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewcommand{\maketitle}{
 
-\pagestyle{empty}
- 
-\begin{center}
-\hspace{0.02\textwidth}
-\parbox[c][\textheight][t]{0.97\textwidth}{
-\begin{center}
+  \pagestyle{empty}
 
-% logos
-\vspace*{-3.2cm}
+  \begin{center}
 
-\hspace*{-3.5cm}
-\begin{tabular}{lp{6cm}c}
-\multirow{3}{8cm}{\includegraphics[height=1.5cm]{images/eth_logo.pdf}} & & \multirow{3}{4cm}{\vspace{-1cm}\begin{flushright}\includegraphics[height=1cm]{images/asl_logo.pdf}\\Autonomous Systems Lab\\
- Prof. Roland Siegwart\end{flushright}}\\
- & & \\
- & & \\
- & & \\
-\end{tabular}
+    \parbox[t]{1.0\textwidth}{
 
-% line
-\hspace*{-124pt}
-\textcolor{gray}{\rule{595pt}{0.1pt}}
+      \begin{center}
+        %% FIXED / STATIC stuff (logos etc.)
+        \begin{tikzpicture}[overlay, remember picture]
+          % Header: ETH logo (top left)
+          \node[anchor=north west, xshift=1.5cm, yshift=-0.8cm]
+            at (current page.north west)
+            {\includegraphics[width=6cm]{images/eth_logo.pdf}};
+          % Header: ASL logo (top right)
+          \node[anchor=north east, xshift=-1.5cm, yshift=-0.4cm]
+            at (current page.north east)
+            {\includegraphics[width=2.2cm]{images/asl_logo.pdf}};
+          % Header: Text below ASL logo (top right)
+          \node[align=right, anchor=north east, xshift=-1.5cm, yshift=-1.6cm]
+            at (current page.north east)
+            {Autonomous Systems Lab\\ Prof. Roland Siegwart};
+          % Footer: 
+          \node[align=left, anchor=south west, xshift=1.4cm, yshift=1.0cm]
+            at (current page.south west)
+            {{\bf Autonomous Systems Lab}\\ Institute of Robotics and Intelligent Systems\\ 8092 Zurich};
+          % Horizontal lines:
+          % \draw[thin, gray, anchor=north] (-11,2.4) -- (11,2.4); % hardcoded (more elegant version below)
+          \draw[thin, gray] ($(current page.north west)+(0,-\mOffset)$) -- ($(current page.north east)+(0,-\mOffset)$);
+          \draw[thin, gray] ($(current page.south west)+(0,\mOffset)$) -- ($(current page.south east)+(0,\mOffset)$);
+        \end{tikzpicture}
 
-\vspace*{1.0cm}
+        %% VARIABLE stuff
+        % type of doc
+        \vspace*{-1cm}
+        {\huge Research Plan}
 
-{\huge Research Plan}\\[3ex]
+        % title
+        \vspace{6cm}
+        {\Huge \bf \@title \par}
 
-\vspace{22cm}
+        % subtitle
+        \if \@subtitle
+        \else
+          \vspace{1cm}
+          {\huge \@subtitle}
+        \fi
 
-% line
-\hspace*{-124pt}
-\textcolor{gray}{\rule{595pt}{0.1pt}}
+        % student name
+        \vspace{1.5cm}
+        {\huge \@student}
 
-\vspace*{0.3cm}
-\hspace*{-10.3cm}
-\begin{tabular}{p{8cm}}
- 		{\bf Autonomous Systems Lab}\\
- 		Institute of Robotics and Intelligent Systems\\
- 		8092 Zurich
-\end{tabular}
+        % date
+        \vspace{1.0cm}
+        {\Large \@proposalDate}
 
-% title	
-\vspace{-18cm}	
-{\Huge \bf \@title \par}
+        % signatures
+        \vspace{5.0cm}
+        \begin{tabular}{ p{4.5cm} p{1cm} p{4.5cm} }
+          \cline{1-1} \cline{3-3}
+          Candidate & & Supervisor
+        \end{tabular}
 
-% subtitle
-\if \@subtitle 
-\else 
-	\vspace{1cm}
-	{\huge \@subtitle}
-\fi
-
-\vspace{1.5cm}
-
-{\huge \@student}
-
-\vspace{1.0cm}
-
-{\Large \@proposalDate}
-
-\vspace{5.0cm}
-
-% signatures
-\begin{tabular}{ p{5cm} p{1cm} p{5cm} }
-  \cline{1-1} \cline{3-3}
-  Doctoral Candidate & & Supervisor
-\end{tabular}
-
-\end{center}
-}
-\end{center}
-
-\cleardoublepage
+      \end{center}
+    } % end parbox
+  \end{center}
+  \cleardoublepage
 
 }
